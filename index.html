@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD System</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--! Font Awesome -->
+    <link rel="stylesheet" href="css/all.min.css" />
+    <!--? Bootstrap  -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- title -->
+    <header class="container-xl pt-4 pt-lg-5 pb-3">
+      <h1 class="brand" aria-label="CRUD System">
+        <span class="brand-letters" aria-hidden="true">
+          <span class="brand-tile">C</span>
+          <span class="brand-tile">R</span>
+          <span class="brand-tile">U</span>
+          <span class="brand-tile">D</span>
+        </span>
+        <span class="brand-word" aria-hidden="true">SYSTEM</span>
+      </h1>
+    </header>
+
+    <main class="container-xl pb-5">
+      <div class="row g-4 g-lg-5">
+        <!-- form -->
+        <section class="col-lg-4" aria-labelledby="formTitle">
+          <div class="panel form-panel">
+            <div class="panel-bar">
+              <span class="panel-dots" aria-hidden="true"
+                ><i></i><i></i><i></i
+              ></span>
+              <h2 class="panel-title" id="formTitle">Product Form</h2>
+            </div>
+
+            <div class="panel-body">
+              <!-- name  -->
+              <div class="mb-3">
+                <label for="productName" class="form-label">Product Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productName"
+                  placeholder="e.g. Iphone"
+                />
+              </div>
+
+              <!-- price + category  -->
+              <div class="row g-3 mb-3">
+                <div class="col-6">
+                  <label for="productPrice" class="form-label">Price</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="productPrice"
+                    placeholder="0"
+                  />
+                </div>
+                <div class="col-6">
+                  <label for="productCategory" class="form-label"
+                    >Category</label
+                  >
+                  <input
+                    list="list"
+                    type="text"
+                    class="form-control"
+                    id="productCategory"
+                    placeholder="Pick or type"
+                  />
+                  <datalist id="list">
+                    <option value="tv" />
+                    <option value="mobile" />
+                    <option value="screens" />
+                    <option value="electronic" />
+                  </datalist>
+                </div>
+              </div>
+
+              <!-- description  -->
+              <div class="mb-3">
+                <label for="productDescription" class="form-label"
+                  >Description</label
+                >
+                <textarea
+                  class="form-control"
+                  id="productDescription"
+                  placeholder="Write a short description..."
+                ></textarea>
+              </div>
+
+              <!-- image  -->
+              <div class="mb-4">
+                <label for="productImage" class="form-label">Image</label>
+                <input type="file" class="form-control" id="productImage" />
+              </div>
+
+              <!-- buttons  -->
+              <div class="d-grid gap-2">
+                <button id="addUpdate" class="btn btn-brut btn-add">
+                  <i class="fas fa-plus"></i> Add Product
+                </button>
+                <button id="btnUpdate" class="btn btn-brut btn-update d-none">
+                  <i class="fas fa-check"></i> Update Product
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- search + products -->
+        <section class="col-lg-8" aria-labelledby="listTitle">
+          <h2 class="visually-hidden" id="listTitle">Products</h2>
+
+          <div class="search-box">
+            <span class="search-icon" aria-hidden="true"
+              ><i class="fas fa-search"></i
+            ></span>
+            <input
+              type="search"
+              class="form-control"
+              id="searchInput"
+              placeholder="Search by name..."
+              aria-label="Search products by name"
+            />
+          </div>
+
+          <div class="row row-cols-1 row-cols-sm-2 g-4 data">
+            <!-- card 1 -->
+            <div class="col">
+              <article class="product-card">
+                <div class="product-media">
+                  <div class="product-frame">
+                    <img
+                      class="product-img"
+                      src="images/p-1.jpg"
+                      alt="Iphone"
+                    />
+                  </div>
+                  <span class="product-index">Index: 0</span>
+                  <span class="product-price"
+                    ><i class="fas fa-tag" aria-hidden="true"></i> 3000</span
+                  >
+                </div>
+
+                <div class="product-body">
+                  <span class="product-category">mobile</span>
+                  <h3 class="product-name">Iphone</h3>
+                  <p class="product-desc">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  </p>
+                </div>
+
+                <div class="product-actions">
+                  <button class="btn btn-brut btn-delete">
+                    <i class="fas fa-trash"></i> Delete
+                  </button>
+                  <button class="btn btn-brut btn-edit">
+                    <i class="fas fa-edit"></i> Edit
+                  </button>
+                </div>
+              </article>
+            </div>
+
+            <!-- card 2 -->
+            <div class="col">
+              <article class="product-card">
+                <div class="product-media">
+                  <div class="product-frame">
+                    <img
+                      class="product-img"
+                      src="images/p-1.jpg"
+                      alt="Samsung TV"
+                    />
+                  </div>
+                  <span class="product-index">Index: 1</span>
+                  <span class="product-price"
+                    ><i class="fas fa-tag" aria-hidden="true"></i> 12500</span
+                  >
+                </div>
+
+                <div class="product-body">
+                  <span class="product-category">tv</span>
+                  <h3 class="product-name">Samsung TV</h3>
+                  <p class="product-desc">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  </p>
+                </div>
+
+                <div class="product-actions">
+                  <button class="btn btn-brut btn-delete">
+                    <i class="fas fa-trash"></i> Delete
+                  </button>
+                  <button class="btn btn-brut btn-edit">
+                    <i class="fas fa-edit"></i> Edit
+                  </button>
+                </div>
+              </article>
+            </div>
+            <div class="col">
+              <article class="product-card">
+                <div class="product-media">
+                  <div class="product-frame">
+                    <img
+                      class="product-img"
+                      src="images/p-1.jpg"
+                      alt="Samsung TV"
+                    />
+                  </div>
+                  <span class="product-index">Index: 1</span>
+                  <span class="product-price"
+                    ><i class="fas fa-tag" aria-hidden="true"></i> 12500</span
+                  >
+                </div>
+
+                <div class="product-body">
+                  <span class="product-category">tv</span>
+                  <h3 class="product-name">Samsung TV</h3>
+                  <p class="product-desc">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  </p>
+                </div>
+
+                <div class="product-actions">
+                  <button class="btn btn-brut btn-delete">
+                    <i class="fas fa-trash"></i> Delete
+                  </button>
+                  <button class="btn btn-brut btn-edit">
+                    <i class="fas fa-edit"></i> Edit
+                  </button>
+                </div>
+              </article>
+            </div>
+            <div class="col">
+              <article class="product-card">
+                <div class="product-media">
+                  <div class="product-frame">
+                    <img
+                      class="product-img"
+                      src="images/p-1.jpg"
+                      alt="Samsung TV"
+                    />
+                  </div>
+                  <span class="product-index">Index: 1</span>
+                  <span class="product-price"
+                    ><i class="fas fa-tag" aria-hidden="true"></i> 12500</span
+                  >
+                </div>
+
+                <div class="product-body">
+                  <span class="product-category">tv</span>
+                  <h3 class="product-name">Samsung TV</h3>
+                  <p class="product-desc">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  </p>
+                </div>
+
+                <div class="product-actions">
+                  <button class="btn btn-brut btn-delete">
+                    <i class="fas fa-trash"></i> Delete
+                  </button>
+                  <button class="btn btn-brut btn-edit">
+                    <i class="fas fa-edit"></i> Edit
+                  </button>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script src="js/index.js"></script>
+  </body>
+</html>
