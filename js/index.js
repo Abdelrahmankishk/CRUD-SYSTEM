@@ -20,14 +20,15 @@ function addProduct() {
     NameValidation() &&
     PriceValidation() &&
     categoryValidation() &&
-    DescriptionValidation()
+    DescriptionValidation() &&
+    ImageValidation()
   ) {
     var NewProduct = {
       name: nameInput.value.trim(),
       price: priceInput.value.trim(),
       category: CategoryInput.value.trim(),
       description: DescriptionInput.value.trim(),
-      image: `images/products/${ImageInput.files[0]?.name === undefined ? "test.jpg" : ImageInput.files[0]?.name}`,
+      image: `images/${ImageInput.files[0]?.name === undefined ? "test.jpg" : ImageInput.files[0]?.name}`,
     };
 
     ProductList.push(NewProduct);
@@ -44,6 +45,12 @@ function clearInputs() {
   CategoryInput.value = null;
   DescriptionInput.value = null;
   ImageInput.value = null;
+
+  nameInput.classList.remove("is-valid");
+  priceInput.classList.remove("is-valid");
+  CategoryInput.classList.remove("is-valid");
+  DescriptionInput.classList.remove("is-valid");
+  ImageInput.classList.remove("is-valid");
 }
 
 function DisplayData() {
@@ -131,14 +138,15 @@ function UpdateProduct() {
     NameValidation() &&
     PriceValidation() &&
     categoryValidation() &&
-    DescriptionValidation()
+    DescriptionValidation() &&
+    ImageValidation()
   ) {
     var updatedProduct = {
       name: nameInput.value.trim(),
       price: priceInput.value.trim(),
       category: CategoryInput.value.trim(),
       description: DescriptionInput.value.trim(),
-      image: `images/products/${ImageInput.files[0]?.name === undefined ? "test.jpg" : ImageInput.files[0]?.name}`,
+      image: `images/${ImageInput.files[0]?.name === undefined ? "test.jpg" : ImageInput.files[0]?.name}`,
     };
 
     ProductList.splice(updateProductIndex, 1, updatedProduct);
@@ -195,6 +203,7 @@ function categoryValidation() {
     return false;
   }
 }
+
 function DescriptionValidation() {
   var descriptionRegex = /^.{3,150}$/m;
   var des = DescriptionInput.value;
@@ -206,6 +215,21 @@ function DescriptionValidation() {
   } else {
     DescriptionInput.classList.add("is-invalid");
     DescriptionInput.classList.remove("is-valid");
+    return false;
+  }
+}
+
+function ImageValidation() {
+  var imageRegex = /\.(?:jpe?g|png)$/i;
+  var img = ImageInput.files[0]?.name;
+
+  if (imageRegex.test(img)) {
+    ImageInput.classList.add("is-valid");
+    ImageInput.classList.remove("is-invalid");
+    return true;
+  } else {
+    ImageInput.classList.add("is-invalid");
+    ImageInput.classList.remove("is-valid");
     return false;
   }
 }

@@ -119,8 +119,13 @@
               <!-- image  -->
               <div class="mb-4">
                 <label for="productImage" class="form-label">Image</label>
-                <input type="file" class="form-control" id="productImage" />
-                <div class="invalid-feedback d-block">
+                <input
+                  onchange="ImageValidation()"
+                  type="file"
+                  class="form-control"
+                  id="productImage"
+                />
+                <div class="invalid-feedback">
                   Choose a JPG, PNG or JPEG image.
                 </div>
               </div>
