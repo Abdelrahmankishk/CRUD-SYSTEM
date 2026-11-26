@@ -18,7 +18,7 @@ function addProduct() {
     price: priceInput.value.trim(),
     category: CategoryInput.value.trim(),
     description: DescriptionInput.value.trim(),
-    image: "images/p-4.jpg",
+    image: `images/${ImageInput.files[0]?.name === undefined ? "test.jpg" : ImageInput.files[0]?.name}`,
   };
 
   ProductList.push(NewProduct);
