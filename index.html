@@ -107,7 +107,11 @@
 
               <!-- buttons  -->
               <div class="d-grid gap-2">
-                <button id="addUpdate" class="btn btn-brut btn-add">
+                <button
+                  onclick="addProduct()"
+                  id="addUpdate"
+                  class="btn btn-brut btn-add"
+                >
                   <i class="fas fa-plus"></i> Add Product
                 </button>
                 <button id="btnUpdate" class="btn btn-brut btn-update d-none">
@@ -135,146 +139,8 @@
             />
           </div>
 
-          <div class="row row-cols-1 row-cols-sm-2 g-4 data">
+          <div id="displayBox" class="row row-cols-1 row-cols-sm-2 g-4 data">
             <!-- card 1 -->
-            <div class="col">
-              <article class="product-card">
-                <div class="product-media">
-                  <div class="product-frame">
-                    <img
-                      class="product-img"
-                      src="images/p-1.jpg"
-                      alt="Iphone"
-                    />
-                  </div>
-                  <span class="product-index">Index: 0</span>
-                  <span class="product-price"
-                    ><i class="fas fa-tag" aria-hidden="true"></i> 3000</span
-                  >
-                </div>
-
-                <div class="product-body">
-                  <span class="product-category">mobile</span>
-                  <h3 class="product-name">Iphone</h3>
-                  <p class="product-desc">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  </p>
-                </div>
-
-                <div class="product-actions">
-                  <button class="btn btn-brut btn-delete">
-                    <i class="fas fa-trash"></i> Delete
-                  </button>
-                  <button class="btn btn-brut btn-edit">
-                    <i class="fas fa-edit"></i> Edit
-                  </button>
-                </div>
-              </article>
-            </div>
-
-            <!-- card 2 -->
-            <div class="col">
-              <article class="product-card">
-                <div class="product-media">
-                  <div class="product-frame">
-                    <img
-                      class="product-img"
-                      src="images/p-1.jpg"
-                      alt="Samsung TV"
-                    />
-                  </div>
-                  <span class="product-index">Index: 1</span>
-                  <span class="product-price"
-                    ><i class="fas fa-tag" aria-hidden="true"></i> 12500</span
-                  >
-                </div>
-
-                <div class="product-body">
-                  <span class="product-category">tv</span>
-                  <h3 class="product-name">Samsung TV</h3>
-                  <p class="product-desc">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  </p>
-                </div>
-
-                <div class="product-actions">
-                  <button class="btn btn-brut btn-delete">
-                    <i class="fas fa-trash"></i> Delete
-                  </button>
-                  <button class="btn btn-brut btn-edit">
-                    <i class="fas fa-edit"></i> Edit
-                  </button>
-                </div>
-              </article>
-            </div>
-            <div class="col">
-              <article class="product-card">
-                <div class="product-media">
-                  <div class="product-frame">
-                    <img
-                      class="product-img"
-                      src="images/p-1.jpg"
-                      alt="Samsung TV"
-                    />
-                  </div>
-                  <span class="product-index">Index: 1</span>
-                  <span class="product-price"
-                    ><i class="fas fa-tag" aria-hidden="true"></i> 12500</span
-                  >
-                </div>
-
-                <div class="product-body">
-                  <span class="product-category">tv</span>
-                  <h3 class="product-name">Samsung TV</h3>
-                  <p class="product-desc">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  </p>
-                </div>
-
-                <div class="product-actions">
-                  <button class="btn btn-brut btn-delete">
-                    <i class="fas fa-trash"></i> Delete
-                  </button>
-                  <button class="btn btn-brut btn-edit">
-                    <i class="fas fa-edit"></i> Edit
-                  </button>
-                </div>
-              </article>
-            </div>
-            <div class="col">
-              <article class="product-card">
-                <div class="product-media">
-                  <div class="product-frame">
-                    <img
-                      class="product-img"
-                      src="images/p-1.jpg"
-                      alt="Samsung TV"
-                    />
-                  </div>
-                  <span class="product-index">Index: 1</span>
-                  <span class="product-price"
-                    ><i class="fas fa-tag" aria-hidden="true"></i> 12500</span
-                  >
-                </div>
-
-                <div class="product-body">
-                  <span class="product-category">tv</span>
-                  <h3 class="product-name">Samsung TV</h3>
-                  <p class="product-desc">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  </p>
-                </div>
-
-                <div class="product-actions">
-                  <button class="btn btn-brut btn-delete">
-                    <i class="fas fa-trash"></i> Delete
-                  </button>
-                  <button class="btn btn-brut btn-edit">
-                    <i class="fas fa-edit"></i> Edit
-                  </button>
-                </div>
-              </article>
-            </div>
           </div>
         </section>
       </div>

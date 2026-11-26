@@ -27,7 +27,7 @@
     "DM Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
-/* ---------- Base ---------- */
+/** ---------- Base ---------- */
 body {
   min-height: 100vh;
   font-family: var(--font-body);
@@ -74,7 +74,7 @@ body::after {
   transform: rotate(18deg);
 }
 
-/* ---------- Title ---------- */
+/** ---------- Title ---------- */
 .brand {
   display: flex;
   flex-wrap: wrap;
@@ -138,7 +138,7 @@ body::after {
   animation: rise 0.5s var(--ease-out) 0.4s backwards;
 }
 
-/* ---------- Panels (form) ---------- */
+/** ---------- Panels (form) ---------- */
 .panel {
   overflow: hidden;
   background: var(--surface);
@@ -200,7 +200,7 @@ body::after {
   }
 }
 
-/* ---------- Form controls ---------- */
+/** ---------- Form controls ---------- */
 .form-label {
   margin-bottom: 0.35rem;
   font-family: var(--font-mono);
@@ -247,7 +247,7 @@ textarea.form-control {
   resize: vertical;
 }
 
-/* file input — dashed upload zone with a sticker-style button */
+/** file input — dashed upload zone with a sticker-style button */
 .form-control[type="file"] {
   padding: 14px;
   font-family: var(--font-mono);
@@ -299,7 +299,7 @@ textarea.form-control {
   box-shadow: 5px 5px 0 var(--ink);
 }
 
-/* ---------- Buttons ---------- */
+/** ---------- Buttons ---------- */
 .btn.btn-brut {
   display: inline-flex;
   align-items: center;
@@ -381,7 +381,7 @@ textarea.form-control {
   transform: rotate(14deg) scale(1.15);
 }
 
-/* ---------- Search ---------- */
+/** ---------- Search ---------- */
 .search-box {
   display: flex;
   margin-bottom: 1.75rem;
@@ -419,7 +419,7 @@ textarea.form-control {
   transform: none;
 }
 
-/* ---------- Product cards ---------- */
+/** ---------- Product cards ---------- */
 .product-card {
   position: relative;
   display: flex;
@@ -557,7 +557,7 @@ textarea.form-control {
   }
 }
 
-/* ---------- Motion ---------- */
+/** ---------- Motion ---------- */
 @keyframes tile-drop {
   from {
     opacity: 0;
