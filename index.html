@@ -65,6 +65,7 @@
                 <div class="col-6">
                   <label for="productPrice" class="form-label">Price</label>
                   <input
+                    oninput="PriceValidation()"
                     type="number"
                     class="form-control"
                     id="productPrice"
@@ -80,6 +81,7 @@
                     >Category</label
                   >
                   <input
+                    oninput="categoryValidation()"
                     list="list"
                     type="text"
                     class="form-control"

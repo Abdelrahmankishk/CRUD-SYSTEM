@@ -16,13 +16,13 @@ var updateProductIndex = 0;
 DisplayData();
 
 function addProduct() {
-  if (NameValidation()) {
+  if (NameValidation() && PriceValidation() && categoryValidation()) {
     var NewProduct = {
       name: nameInput.value.trim(),
       price: priceInput.value.trim(),
       category: CategoryInput.value.trim(),
       description: DescriptionInput.value.trim(),
-      image: `images/${ImageInput.files[0]?.name === undefined ? "test.jpg" : ImageInput.files[0]?.name}`,
+      image: `images/products/${ImageInput.files[0]?.name === undefined ? "test.jpg" : ImageInput.files[0]?.name}`,
     };
 
     ProductList.push(NewProduct);
@@ -122,27 +122,30 @@ function getProductDataForUpdate(i) {
 }
 
 function UpdateProduct() {
-  var updatedProduct = {
-    name: nameInput.value.trim(),
-    price: priceInput.value.trim(),
-    category: CategoryInput.value.trim(),
-    description: DescriptionInput.value.trim(),
-    image: `images/${ImageInput.files[0]?.name === undefined ? "test.jpg" : ImageInput.files[0]?.name}`,
-  };
+  if (NameValidation() && PriceValidation() && categoryValidation()) {
+    var updatedProduct = {
+      name: nameInput.value.trim(),
+      price: priceInput.value.trim(),
+      category: CategoryInput.value.trim(),
+      description: DescriptionInput.value.trim(),
+      image: `images/products/${ImageInput.files[0]?.name === undefined ? "test.jpg" : ImageInput.files[0]?.name}`,
+    };
 
-  ProductList.splice(updateProductIndex, 1, updatedProduct);
+    ProductList.splice(updateProductIndex, 1, updatedProduct);
 
-  localStorage.setItem("Products", JSON.stringify(ProductList));
-  DisplayData();
-  clearInputs();
+    localStorage.setItem("Products", JSON.stringify(ProductList));
+    DisplayData();
+    clearInputs();
 
-  btnUpdate.classList.add("d-none");
-  Addbtn.classList.remove("d-none");
+    btnUpdate.classList.add("d-none");
+    Addbtn.classList.remove("d-none");
+  }
 }
 
 function NameValidation() {
   var nameRegex = /^[A-Za-z][A-Za-z0-9\W_]{2,29}$/;
   var name = nameInput.value;
+
   if (nameRegex.test(name)) {
     nameInput.classList.add("is-valid");
     nameInput.classList.remove("is-invalid");
@@ -150,6 +153,34 @@ function NameValidation() {
   } else {
     nameInput.classList.add("is-invalid");
     nameInput.classList.remove("is-valid");
+    return false;
+  }
+}
+function categoryValidation() {
+  var categoryRegex = /^(?:tv|mobile|screens|electronic)$/;
+  var category = CategoryInput.value;
+
+  if (categoryRegex.test(category)) {
+    CategoryInput.classList.add("is-valid");
+    CategoryInput.classList.remove("is-invalid");
+    return true;
+  } else {
+    CategoryInput.classList.add("is-invalid");
+    CategoryInput.classList.remove("is-valid");
+    return false;
+  }
+}
+function PriceValidation() {
+  var priceRegex = /^(?:0|[1-9]\d*)(?:\.\d{1,2})?$/;
+  var Price = priceInput.value;
+
+  if (priceRegex.test(Price)) {
+    priceInput.classList.add("is-valid");
+    priceInput.classList.remove("is-invalid");
+    return true;
+  } else {
+    priceInput.classList.add("is-invalid");
+    priceInput.classList.remove("is-valid");
     return false;
   }
 }
