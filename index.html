@@ -106,12 +106,13 @@
                   >Description</label
                 >
                 <textarea
+                  oninput="DescriptionValidation()"
                   class="form-control"
                   id="productDescription"
                   placeholder="Write a short description..."
                 ></textarea>
                 <div class="invalid-feedback">
-                  Description must be 10 to 150 characters.
+                  Description must be 3 to 150 characters.
                 </div>
               </div>
 
@@ -119,6 +120,9 @@
               <div class="mb-4">
                 <label for="productImage" class="form-label">Image</label>
                 <input type="file" class="form-control" id="productImage" />
+                <div class="invalid-feedback d-block">
+                  Choose a JPG, PNG or JPEG image.
+                </div>
               </div>
 
               <!-- buttons  -->

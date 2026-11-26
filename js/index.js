@@ -16,7 +16,12 @@ var updateProductIndex = 0;
 DisplayData();
 
 function addProduct() {
-  if (NameValidation() && PriceValidation() && categoryValidation()) {
+  if (
+    NameValidation() &&
+    PriceValidation() &&
+    categoryValidation() &&
+    DescriptionValidation()
+  ) {
     var NewProduct = {
       name: nameInput.value.trim(),
       price: priceInput.value.trim(),
@@ -122,7 +127,12 @@ function getProductDataForUpdate(i) {
 }
 
 function UpdateProduct() {
-  if (NameValidation() && PriceValidation() && categoryValidation()) {
+  if (
+    NameValidation() &&
+    PriceValidation() &&
+    categoryValidation() &&
+    DescriptionValidation()
+  ) {
     var updatedProduct = {
       name: nameInput.value.trim(),
       price: priceInput.value.trim(),
@@ -156,6 +166,21 @@ function NameValidation() {
     return false;
   }
 }
+function PriceValidation() {
+  var priceRegex = /^(?:0|[1-9]\d*)(?:\.\d{1,2})?$/;
+  var Price = priceInput.value;
+
+  if (priceRegex.test(Price)) {
+    priceInput.classList.add("is-valid");
+    priceInput.classList.remove("is-invalid");
+    return true;
+  } else {
+    priceInput.classList.add("is-invalid");
+    priceInput.classList.remove("is-valid");
+    return false;
+  }
+}
+
 function categoryValidation() {
   var categoryRegex = /^(?:tv|mobile|screens|electronic)$/;
   var category = CategoryInput.value;
@@ -170,17 +195,17 @@ function categoryValidation() {
     return false;
   }
 }
-function PriceValidation() {
-  var priceRegex = /^(?:0|[1-9]\d*)(?:\.\d{1,2})?$/;
-  var Price = priceInput.value;
+function DescriptionValidation() {
+  var descriptionRegex = /^.{3,150}$/m;
+  var des = DescriptionInput.value;
 
-  if (priceRegex.test(Price)) {
-    priceInput.classList.add("is-valid");
-    priceInput.classList.remove("is-invalid");
+  if (descriptionRegex.test(des)) {
+    DescriptionInput.classList.add("is-valid");
+    DescriptionInput.classList.remove("is-invalid");
     return true;
   } else {
-    priceInput.classList.add("is-invalid");
-    priceInput.classList.remove("is-valid");
+    DescriptionInput.classList.add("is-invalid");
+    DescriptionInput.classList.remove("is-valid");
     return false;
   }
 }
