@@ -25,6 +25,8 @@
     "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono:
     "DM Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --danger: #d92f0b;
+  --danger-soft: #ffd9cf;
 }
 
 /** ---------- Base ---------- */
@@ -664,5 +666,114 @@ textarea.form-control {
   }
   50% {
     transform: translateY(-8px) rotate(4deg);
+  }
+}
+/* ---------- Validation ---------- */
+/* invalid input: red border, hard red shadow, quick shake */
+.form-control.is-invalid,
+.form-control.is-invalid:focus {
+  border-color: var(--danger);
+  box-shadow: 4px 4px 0 var(--danger);
+}
+
+.form-control.is-invalid {
+  animation: shake 0.4s ease-in-out;
+}
+
+/* remove Bootstrap's default red icon and extra padding */
+.form-control.is-invalid:not([type="file"]),
+textarea.form-control.is-invalid:not([type="file"]) {
+  padding-right: 14px;
+  background-image: none;
+}
+
+/* file input: Bootstrap's icon would replace the stripes, so restore them */
+.form-control[type="file"].is-invalid {
+  padding-right: 14px;
+  background-image: linear-gradient(
+    135deg,
+    rgba(27, 22, 18, 0.07) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(27, 22, 18, 0.07) 50%,
+    rgba(27, 22, 18, 0.07) 75%,
+    transparent 75%
+  );
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-size: 28px 28px;
+}
+
+/* the message: a sticker with a "!" badge and a small pointer to the input */
+.invalid-feedback {
+  position: relative;
+  margin-top: 1rem;
+  padding: 0.5rem 0.75rem 0.5rem 2.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+  background: var(--danger-soft);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transform-origin: 1.2rem 0;
+  animation: pop-in 0.3s var(--ease-pop) backwards;
+}
+
+.invalid-feedback::before {
+  content: "!";
+  position: absolute;
+  top: 0.5rem;
+  left: 0.6rem;
+  display: grid;
+  place-items: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #fff;
+  background: var(--danger);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+}
+
+.invalid-feedback::after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 1.1rem;
+  width: 10px;
+  height: 10px;
+  background: var(--danger-soft);
+  border-top: 2px solid var(--ink);
+  border-left: 2px solid var(--ink);
+  transform: rotate(45deg);
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
   }
 }

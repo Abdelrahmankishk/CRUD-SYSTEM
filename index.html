@@ -49,11 +49,15 @@
               <div class="mb-3">
                 <label for="productName" class="form-label">Product Name</label>
                 <input
+                  oninput="NameValidation()"
                   type="text"
                   class="form-control"
                   id="productName"
                   placeholder="e.g. Iphone"
                 />
+                <div class="invalid-feedback">
+                  Name must start with a letter and be 3 to 30 characters.
+                </div>
               </div>
 
               <!-- price + category  -->
@@ -66,7 +70,11 @@
                     id="productPrice"
                     placeholder="0"
                   />
+                  <div class="invalid-feedback">
+                    Enter a valid price, like 3000.
+                  </div>
                 </div>
+
                 <div class="col-6">
                   <label for="productCategory" class="form-label"
                     >Category</label
@@ -84,6 +92,9 @@
                     <option value="screens" />
                     <option value="electronic" />
                   </datalist>
+                  <div class="invalid-feedback">
+                    Pick a category from the list.
+                  </div>
                 </div>
               </div>
 
@@ -97,6 +108,9 @@
                   id="productDescription"
                   placeholder="Write a short description..."
                 ></textarea>
+                <div class="invalid-feedback">
+                  Description must be 10 to 150 characters.
+                </div>
               </div>
 
               <!-- image  -->
