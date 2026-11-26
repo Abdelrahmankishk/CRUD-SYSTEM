@@ -1,11 +1,11 @@
-var nameInput = document.getElementById("productName");
-var priceInput = document.getElementById("productPrice");
-var CategoryInput = document.getElementById("productCategory");
-var DescriptionInput = document.getElementById("productDescription");
-var ImageInput = document.getElementById("productImage");
+const nameInput = document.getElementById("productName");
+const priceInput = document.getElementById("productPrice");
+const CategoryInput = document.getElementById("productCategory");
+const DescriptionInput = document.getElementById("productDescription");
+const ImageInput = document.getElementById("productImage");
 const emptyState = document.getElementById("emptyState");
 
-var productCard = document.getElementById("displayBox");
+const productCard = document.getElementById("displayBox");
 
 var ProductList = JSON.parse(localStorage.getItem("Products")) ?? [];
 
@@ -66,7 +66,7 @@ function DisplayData() {
                 </div>
 
                 <div class="product-actions">
-                  <button class="btn btn-brut btn-delete">
+                  <button  onclick="deleteProduct(${i})" class="btn btn-brut btn-delete">
                     <i class="fas fa-trash"></i> Delete
                   </button>
                   <button class="btn btn-brut btn-edit">
@@ -82,4 +82,10 @@ function DisplayData() {
 
 function toggleEmptyState(list) {
   emptyState.classList.toggle("d-none", list.length > 0);
+}
+
+function deleteProduct(index) {
+  ProductList.splice(index);
+  localStorage.setItem("Products", JSON.stringify(ProductList));
+  DisplayData();
 }
