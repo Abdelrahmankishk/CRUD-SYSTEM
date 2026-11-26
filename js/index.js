@@ -15,27 +15,40 @@ var ProductList = JSON.parse(localStorage.getItem("Products")) ?? [];
 var updateProductIndex = 0;
 DisplayData();
 
-function addProduct() {
+async function addProduct() {
   if (
-    NameValidation() &&
-    PriceValidation() &&
-    categoryValidation() &&
-    DescriptionValidation() &&
-    ImageValidation()
+    !NameValidation() ||
+    !PriceValidation() ||
+    !categoryValidation() ||
+    !DescriptionValidation() ||
+    !ImageValidation()
   ) {
-    var NewProduct = {
+    return;
+  }
+
+  try {
+    const imageData = await readImageAsDataURL(ImageInput.files[0]);
+
+    const NewProduct = {
       name: nameInput.value.trim(),
       price: priceInput.value.trim(),
       category: CategoryInput.value.trim(),
       description: DescriptionInput.value.trim(),
-      image: `images/${ImageInput.files[0]?.name === undefined ? "test.jpg" : ImageInput.files[0]?.name}`,
+      image: imageData,
     };
 
     ProductList.push(NewProduct);
 
-    localStorage.setItem("Products", JSON.stringify(ProductList));
+    if (!saveProducts()) {
+      ProductList.pop();
+      return;
+    }
+
     DisplayData();
     clearInputs();
+  } catch (error) {
+    console.error(error);
+    alert("Unable to read the selected image.");
   }
 }
 
@@ -67,8 +80,13 @@ function toggleEmptyState(list) {
 }
 
 function deleteProduct(index) {
-  ProductList.splice(index, 1);
-  localStorage.setItem("Products", JSON.stringify(ProductList));
+  const deletedProduct = ProductList.splice(index, 1)[0];
+
+  if (!saveProducts()) {
+    ProductList.splice(index, 0, deletedProduct);
+    return;
+  }
+
   DisplayData();
 }
 
@@ -84,7 +102,6 @@ function displayHTMLCol(i) {
                       alt="Product Image"
                     />
                   </div>
-                  <span class="product-index">Index: ${i + 1}</span>
                   <span class="product-price"
                     ><i class="fas fa-tag" aria-hidden="true"></i> ${ProductList[i].price} EGP</span
                   >
@@ -131,32 +148,56 @@ function getProductDataForUpdate(i) {
 
   Addbtn.classList.add("d-none");
   Updatebtn.classList.remove("d-none");
+  ImageInput.value = "";
+  ImageInput.classList.remove("is-valid", "is-invalid");
 }
 
-function UpdateProduct() {
+async function UpdateProduct() {
   if (
-    NameValidation() &&
-    PriceValidation() &&
-    categoryValidation() &&
-    DescriptionValidation() &&
-    ImageValidation()
+    !NameValidation() ||
+    !PriceValidation() ||
+    !categoryValidation() ||
+    !DescriptionValidation() ||
+    !ImageValidation(false)
   ) {
-    var updatedProduct = {
+    return;
+  }
+
+  try {
+    const currentProduct = ProductList[updateProductIndex];
+
+    const selectedFile = ImageInput.files[0];
+
+    // Keep the existing image unless a new one is selected.
+    const imageData = selectedFile
+      ? await readImageAsDataURL(selectedFile)
+      : currentProduct.image;
+
+    const updatedProduct = {
       name: nameInput.value.trim(),
       price: priceInput.value.trim(),
       category: CategoryInput.value.trim(),
       description: DescriptionInput.value.trim(),
-      image: `images/${ImageInput.files[0]?.name === undefined ? "test.jpg" : ImageInput.files[0]?.name}`,
+      image: imageData,
     };
+
+    const oldProduct = currentProduct;
 
     ProductList.splice(updateProductIndex, 1, updatedProduct);
 
-    localStorage.setItem("Products", JSON.stringify(ProductList));
+    if (!saveProducts()) {
+      ProductList.splice(updateProductIndex, 1, oldProduct);
+      return;
+    }
+
     DisplayData();
     clearInputs();
 
-    btnUpdate.classList.add("d-none");
+    Updatebtn.classList.add("d-none");
     Addbtn.classList.remove("d-none");
+  } catch (error) {
+    console.error(error);
+    alert("Unable to update the product image.");
   }
 }
 
@@ -219,17 +260,62 @@ function DescriptionValidation() {
   }
 }
 
-function ImageValidation() {
-  var imageRegex = /\.(?:jpe?g|png)$/i;
-  var img = ImageInput.files[0]?.name;
+function ImageValidation(required = true) {
+  const file = ImageInput.files[0];
 
-  if (imageRegex.test(img)) {
-    ImageInput.classList.add("is-valid");
-    ImageInput.classList.remove("is-invalid");
+  // During editing, selecting a new image is optional.
+  if (!file && !required) {
+    ImageInput.classList.remove("is-invalid", "is-valid");
     return true;
-  } else {
+  }
+
+  if (!file) {
     ImageInput.classList.add("is-invalid");
     ImageInput.classList.remove("is-valid");
+    return false;
+  }
+
+  const validTypes = ["image/jpeg", "image/png"];
+
+  const isValid = validTypes.includes(file.type) && file.size <= MAX_IMAGE_SIZE;
+
+  ImageInput.classList.toggle("is-valid", isValid);
+  ImageInput.classList.toggle("is-invalid", !isValid);
+
+  return isValid;
+}
+
+const MAX_IMAGE_SIZE = 1024 * 1024; // 1 MB
+
+function readImageAsDataURL(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+
+    reader.onerror = () => {
+      reject(new Error("Failed to read the image."));
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+
+function saveProducts() {
+  try {
+    localStorage.setItem("Products", JSON.stringify(ProductList));
+
+    return true;
+  } catch (error) {
+    console.error("Storage error:", error);
+
+    alert(
+      "Unable to save products. Browser storage may be full. " +
+        "Try using smaller images or removing existing products.",
+    );
+
     return false;
   }
 }
