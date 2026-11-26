@@ -108,7 +108,7 @@ function displayHTMLCol(i) {
                 </div>
 
                 <div class="product-body">
-                  <span class="product-category">mobile</span>
+                  <span class="product-category">${ProductList[i].category}</span>
                   <h3 class="product-name">${ProductList[i].name}</h3>
                   <p class="product-desc">
                     ${ProductList[i].description}
