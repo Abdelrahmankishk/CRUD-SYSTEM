@@ -615,3 +615,54 @@ textarea.form-control {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Empty state ---------- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  background-color: var(--surface);
+  border: var(--border) dashed var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  animation: rise 0.45s var(--ease-out) backwards;
+}
+
+.empty-icon {
+  display: grid;
+  place-items: center;
+  width: 5rem;
+  height: 5rem;
+  font-size: 2.25rem;
+  background: var(--sun);
+  border: var(--border) solid var(--ink);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transform: rotate(-6deg);
+  animation: bob 3s ease-in-out infinite;
+}
+
+.empty-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.empty-text {
+  max-width: 34ch;
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(4deg);
+  }
+}

@@ -3,9 +3,13 @@ var priceInput = document.getElementById("productPrice");
 var CategoryInput = document.getElementById("productCategory");
 var DescriptionInput = document.getElementById("productDescription");
 var ImageInput = document.getElementById("productImage");
+const emptyState = document.getElementById("emptyState");
 
 var productCard = document.getElementById("displayBox");
-var ProductList = [];
+
+var ProductList = JSON.parse(localStorage.getItem("Products")) ?? [];
+
+DisplayData();
 
 function addProduct() {
   var NewProduct = {
@@ -17,7 +21,9 @@ function addProduct() {
   };
 
   ProductList.push(NewProduct);
+  console.log(ProductList);
 
+  localStorage.setItem("Products", JSON.stringify(ProductList));
   DisplayData();
   clearInputs();
 }
@@ -31,6 +37,7 @@ function clearInputs() {
 }
 
 function DisplayData() {
+  toggleEmptyState(ProductList);
   var box = "";
   for (var i = 0; i < ProductList.length; i++) {
     box += `
@@ -44,7 +51,7 @@ function DisplayData() {
                       alt="Product Image"
                     />
                   </div>
-                  <span class="product-index">Index: 0</span>
+                  <span class="product-index">Index: ${i + 1}</span>
                   <span class="product-price"
                     ><i class="fas fa-tag" aria-hidden="true"></i> ${ProductList[i].price}</span
                   >
@@ -71,4 +78,8 @@ function DisplayData() {
         `;
   }
   productCard.innerHTML = box;
+}
+
+function toggleEmptyState(list) {
+  emptyState.classList.toggle("d-none", list.length > 0);
 }
