@@ -5,11 +5,14 @@ const DescriptionInput = document.getElementById("productDescription");
 const ImageInput = document.getElementById("productImage");
 const emptyState = document.getElementById("emptyState");
 const SearchInput = document.getElementById("searchInput");
+const Addbtn = document.getElementById("btnAdd");
+const Updatebtn = document.getElementById("btnUpdate");
 
 const productCard = document.getElementById("displayBox");
 
 var ProductList = JSON.parse(localStorage.getItem("Products")) ?? [];
 
+var updateProductIndex = 0;
 DisplayData();
 
 function addProduct() {
@@ -22,7 +25,6 @@ function addProduct() {
   };
 
   ProductList.push(NewProduct);
-  console.log(ProductList);
 
   localStorage.setItem("Products", JSON.stringify(ProductList));
   DisplayData();
@@ -86,7 +88,7 @@ function displayHTMLCol(i) {
                   <button  onclick="deleteProduct(${i})" class="btn btn-brut btn-delete">
                     <i class="fas fa-trash"></i> Delete
                   </button>
-                  <button class="btn btn-brut btn-edit">
+                  <button onclick="getProductDataForUpdate(${i})" class="btn btn-brut btn-edit">
                     <i class="fas fa-edit"></i> Edit
                   </button>
                 </div>
@@ -104,4 +106,34 @@ function searchProducts() {
     }
   }
   productCard.innerHTML = box;
+}
+
+function getProductDataForUpdate(i) {
+  updateProductIndex = i;
+  nameInput.value = ProductList[i].name;
+  priceInput.value = ProductList[i].price;
+  CategoryInput.value = ProductList[i].category;
+  DescriptionInput.value = ProductList[i].description;
+
+  Addbtn.classList.add("d-none");
+  Updatebtn.classList.remove("d-none");
+}
+
+function UpdateProduct() {
+  var updatedProduct = {
+    name: nameInput.value.trim(),
+    price: priceInput.value.trim(),
+    category: CategoryInput.value.trim(),
+    description: DescriptionInput.value.trim(),
+    image: `images/${ImageInput.files[0]?.name === undefined ? "test.jpg" : ImageInput.files[0]?.name}`,
+  };
+
+  ProductList.splice(updateProductIndex, 1, updatedProduct);
+
+  localStorage.setItem("Products", JSON.stringify(ProductList));
+  DisplayData();
+  clearInputs();
+
+  btnUpdate.classList.add("d-none");
+  Addbtn.classList.remove("d-none");
 }
