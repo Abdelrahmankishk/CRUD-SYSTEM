@@ -4,6 +4,7 @@ const CategoryInput = document.getElementById("productCategory");
 const DescriptionInput = document.getElementById("productDescription");
 const ImageInput = document.getElementById("productImage");
 const emptyState = document.getElementById("emptyState");
+const SearchInput = document.getElementById("searchInput");
 
 const productCard = document.getElementById("displayBox");
 
@@ -40,7 +41,23 @@ function DisplayData() {
   toggleEmptyState(ProductList);
   var box = "";
   for (var i = 0; i < ProductList.length; i++) {
-    box += `
+    box += displayHTMLCol(i);
+  }
+  productCard.innerHTML = box;
+}
+
+function toggleEmptyState(list) {
+  emptyState.classList.toggle("d-none", list.length > 0);
+}
+
+function deleteProduct(index) {
+  ProductList.splice(index, 1);
+  localStorage.setItem("Products", JSON.stringify(ProductList));
+  DisplayData();
+}
+
+function displayHTMLCol(i) {
+  return `
             <div class="col">
               <article class="product-card">
                 <div class="product-media">
@@ -53,7 +70,7 @@ function DisplayData() {
                   </div>
                   <span class="product-index">Index: ${i + 1}</span>
                   <span class="product-price"
-                    ><i class="fas fa-tag" aria-hidden="true"></i> ${ProductList[i].price}</span
+                    ><i class="fas fa-tag" aria-hidden="true"></i> ${ProductList[i].price} EGP</span
                   >
                 </div>
 
@@ -76,16 +93,15 @@ function DisplayData() {
               </article>
             </div>
         `;
+}
+
+function searchProducts() {
+  var search = SearchInput.value;
+  var box = "";
+  for (var i = 0; i < ProductList.length; i++) {
+    if (ProductList[i].name.toLowerCase().includes(search.toLowerCase())) {
+      box += displayHTMLCol(i);
+    }
   }
   productCard.innerHTML = box;
-}
-
-function toggleEmptyState(list) {
-  emptyState.classList.toggle("d-none", list.length > 0);
-}
-
-function deleteProduct(index) {
-  ProductList.splice(index);
-  localStorage.setItem("Products", JSON.stringify(ProductList));
-  DisplayData();
 }
